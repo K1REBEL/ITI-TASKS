@@ -1,0 +1,63 @@
+.navbar {
+   background-color: #808080;
+   overflow: hidden;
+   padding-top: -10px; /* Add this line */
+   margin-top: 0; /* Add this line */
+ }
+ 
+ /* Style the list items in the navbar */
+ .navbar li {
+   float: left; /* Align the items to the left */
+   list-style-type: none; /* Remove the bullets */
+   margin: 0; /* Remove the margins */
+   padding: 0; /* Remove the padding */
+ }
+ 
+ /* Style the links in the navbar */
+ .navbar a {
+   display: block; /* Make the links fill the entire list item */
+   color: white; /* Set the link color to white */
+   text-align: center; /* Center the link text */
+   text-decoration: none; /* Remove the underline */
+   padding: 15px; /*Add some padding*/
+ }
+ 
+ /* Change the background color of the links on hover */
+ .navbar a:hover {
+   background-color: red;
+ }
+ 
+ /* Style the image in the navbar */
+ .navbar img {
+   float: right; /* Align the image to the right */
+   height: 70px; /* Set the image height */
+   padding: 0; /* Add this line */
+   margin-top: -16px; /* Add this line */
+ }
+
+ .course {
+   display: inline-block;
+   width: 40%;
+   margin: 10px;
+ }
+
+ div {
+   display: inline-block;
+   width: 40%;
+   margin: 10px;
+ }
+
+ /* #div1 {
+   padding-top: 60px;
+ } */
+
+ footer {
+   text-align: center;
+   color: navy;
+   float: bottom;
+   z-index: 1;
+   /* padding-bottom: -50px;
+   margin-bottom: -50px; */
+ }
+
+ 

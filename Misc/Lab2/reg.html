@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Form</title>
+  <style>
+    h1 {
+      color: lightseagreen;
+    }
+    span {
+      color: red;
+    }
+    p {
+      font: 3px;
+    }
+    .dash {
+      display: inline;
+    }
+    .under{
+      color:blue;
+      
+    }
+    .text {
+      background-color: #ccfdcc;
+      border-style: dotted;
+      border-color: green;
+    }
+    .C1 {
+      background-color: #ccfdcc;
+    }
+    .formaya {
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+      padding: 10px;
+      background-color: #e0fee0;
+      border-style: solid;
+      border-color: green;
+      margin: auto;
+      /* z-index: 1; */
+    }
+    .parent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 90vh;
+    }
+  
+    .child {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="roadmap.html">Road Map</a></li>
+      <li><a href="reg.html">Registration Form</a></li>
+      <li><a href="https://iti.gov.eg/iti/home">Contact</a></li>
+    </ul>
+    <img src="Assets/ITI_logo.png" alt="Logo"> <!-- Replace the src attribute with your own image URL -->
+  </header>
+
+  <div class="formaya">
+    <h1>Register - Create Account</h1>
+    <p class="text">Field marked with <span>*</span> are compulsory fields</p>
+    <table>
+      <form id="myform" method="post" action="">
+        <tr>
+          <td class="C1"><label for="name"><span>*</span>Your Name</label></td>
+          <td><input type="text" size="20" id="name" name="name" required></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="email"><span>*</span>E-mail ID</label></td>
+          <td><input type="email" size="30" id="email" name="email" required></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="alt_email">Alternate E-mail ID</label></td>
+          <td><input type="email" size="30" id="alt_email" name="alt_email"></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="phone">Your Phone</label></td>
+          <td>
+            <p>Country Code - City Code - Phone Number</p>
+            <input type="text" id="phone1" name="phone1" size="8" maxlength="3">
+            <p class="dash">-</p>
+            <input type="text" id="phone2" name="phone2" size="4" maxlength="3">
+            <p class="dash">-</p>
+            <input type="text" id="phone3" name="phone3" size="15" maxlength="4">
+          </td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="mobile">Mobile Phone</label></td>
+          <td><input type="tel" id="mobile" name="mobile" required></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="address"><span>*</span>Your Postal Address</label></td>
+          <td><textarea id="address" name="address" rows="4" cols="40" required></textarea></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="country"><span>*</span>Country</label></td>
+          <td>
+            <select id="country" name="country" required>
+              <option value="">Select a country</option>
+              <option value="Egypt">Egypt</option>
+              <option value="Japan">Japan</option>
+              <option value="France">France</option>
+              <option value="USA">USA</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="password"><span>*</span>Password</label></td>
+          <td><input type="password" id="password" name="password" required></td>
+        </tr>
+        <tr>
+          <td class="C1"><label for="cPassword"><span>*</span>Re-Enter Password</label></td>
+          <td><input type="password" id="cPassword" name="cPassword" required></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan="2">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I accept the <span class="under">Terms of use</span></label>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" id="submit" name="submit" value="Continue >>"> <span> </span> <input type="reset" id="reset" name="reset" value="Reset"></td>
+        </tr>
+      </form>
+    </table>
+  </div>
+
+  <!-- <footer> <p>Copyright 2021 by Noha Salah &reg;.All Rights Reserved.</p> </footer> -->
+  <div class="footer">
+    
+  </div>
+
+
+  <footer class="parent">
+    <hr>
+    <div class="child"><p>Copyright 2021 by Noha Salah &reg;.All Rights Reserved.</p></div>
+  </footer>
+  
+  
+</body>
+</html>
