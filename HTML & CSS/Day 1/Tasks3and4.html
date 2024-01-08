@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tasks 3 & 4</title>
+</head>
+<body>
+   <!-- Task 3 -->
+
+   <svg width="250" height="250" style="border: 3px black; display: block;">
+      <polygon points="150,30 150,200 70,200" fill="red" />
+      <text x="110" y="220" fill="black">a</text>
+      <text x="160" y="130" fill="black">b</text>
+      <text x="85" y="130" fill="black">c</text>
+   </svg>
+
+   <h4>according to pythagoras theorem</h4>
+   <h3 style="color: red;">
+      <math display="inline">
+         <ms>c = </ms>
+         <msqrt>
+            <msup>
+               <mi>a</mi>
+               <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <msup>
+               <mi>b</mi>
+               <mn>2</mn>
+            </msup>
+         </msqrt>
+      </math>
+   </h3>
+
+   <hr>
+   <!-- Task 4 -->
+
+   <canvas style="border: 1px solid black; margin-top: 25px;" id="myCanvas" width="200" height="200"></canvas>
+   <script>
+      var canvas = document.getElementById("myCanvas")
+      var context = canvas.getContext("2d")
+      var x = 0
+      var y = 0
+
+      function draw() {
+         context.clearRect(0, 0, canvas.width, canvas.height)
+         context.beginPath()
+         context.moveTo(0, 0)
+         context.lineTo(x, y)
+         context.strokeStyle = "brown"
+         context.lineWidth = 5
+         context.stroke()
+         x += 1
+         y += 1
+      }
+      setInterval(draw, 50)
+   </script>
+</body>
+</html>

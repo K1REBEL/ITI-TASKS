@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Magic Text</title>
+      <style>
+         .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+         }
+         .line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: #ccc;
+            z-index: -1;
+         }
+         .left {
+            position: relative;
+            width: 50%;
+            padding-right: 20px;
+            text-align: right;
+         }
+         .left label {
+            display: block;
+            margin-bottom: 10px;
+         }
+         .right {
+            position: relative;
+            width: 50%;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+         }
+         .right input[type="range"] {
+            width: 30%;
+            margin-bottom: 10px;
+         }
+         h1 {
+            margin: 20px;
+            font-size: 48px;
+            text-align: center;
+         }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+         <div class="left">
+            <label for="redSlider">Red:</label>
+            <label for="greenSlider">Green:</label>
+            <label for="blueSlider">Blue:</label>
+         </div>
+
+         <div class="line"></div>
+
+         <div class="right">
+            <input type="range" id="redSlider" min="0" max="255" value="0"/>
+            <input type="range" id="greenSlider" min="0" max="255" value="0"/>
+            <input type="range" id="blueSlider" min="0" max="255" value="0"/>
+         </div>
+      </div>
+      <h1 id="colorText">
+         Change the 3 Color Ranges above and observe my color Change
+      </h1>
+      <script>
+         var redSlider = document.getElementById("redSlider")
+         var greenSlider = document.getElementById("greenSlider")
+         var blueSlider = document.getElementById("blueSlider")
+         var colorText = document.getElementById("colorText")
+
+         function updateColor() {
+            var redValue = redSlider.value
+            var greenValue = greenSlider.value
+            var blueValue = blueSlider.value
+            var colorString = "rgb(" + redValue + "," + greenValue + "," + blueValue + ")"
+            colorText.style.color = colorString }
+
+         redSlider.addEventListener("input", updateColor)
+         greenSlider.addEventListener("input", updateColor)
+         blueSlider.addEventListener("input", updateColor)
+      </script>
+  </body>
+</html>

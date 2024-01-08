@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Video Player</title>
+   <style>
+      .container {
+         width: 90%;
+         margin-top: 20px;
+         margin-left: auto;
+         margin-right: auto;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+      }
+      .button-container {
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+      }
+      .button-container button {
+         margin-bottom: 10px;
+      }
+      .video {
+         width: 33.33%;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+      .video video {
+         width: 100%;
+      }
+      .sliders {
+         width: 33.33%;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+      #timelineSlider {
+         margin-top: 15px;
+         width: 100%;
+      }
+   </style>
+</head>
+<body>
+   <div class="container">
+      <div class="button-container">
+         <button onclick="play()">play</button>
+         <button onclick="pause()">pause</button>
+         <button onclick="toggleFullscreen()">fullscreen</button>
+         <button onclick="playPrev()">previous</button>
+         <button onclick="playNext()">next</button>
+         <button onclick="skipBack()">skip back 5S</button>
+         <button onclick="skipForward()">skip 5S</button>
+         <button onclick="mute()">mute</button>
+      </div>
+
+      <div class="video">
+         <video id="vid" src="./Media/frozen.mp4" width="500" ></video>
+         <input type="range" id="timelineSlider" min="0" max="100" step="1" value="0" onchange="seekTo()">
+      </div>
+   
+      <div class="sliders">
+         <label>Volume</label>
+         <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1" onchange="setVolume()">
+         <hr>
+         <label>Playback Speed</label>
+         <input type="range" id="playbackSpeed" min="0.5" max="2" step="0.1" value="1" onchange="setPlaybackSpeed()">
+      </div>
+   </div>
+
+   <script>
+      var videoArray = ["./Media/frozen.mp4", "./Media/IMG_2001.MOV"] // PUT your media paths here!
+      var currentVideoIndex = 0
+      var video = document.getElementById("vid")
+      var timeline = document.getElementById("timelineSlider")
+
+      video.addEventListener("timeupdate", function() {
+         var currentTime = video.currentTime
+         var duration = video.duration
+         var percentage = (currentTime / duration) * 100
+         timeline.value = percentage })
+
+      function play() {
+         video.play()
+      }
+      function pause() {
+         video.pause()
+      }
+      function toggleFullscreen() {
+         video.requestFullscreen()
+      }
+      function playPrev() {
+         if (currentVideoIndex > 0) { currentVideoIndex-- }
+         else { currentVideoIndex = videoArray.length - 1 }
+         video.src = videoArray[currentVideoIndex]
+         video.play()
+      }
+      function playNext() {
+         if (currentVideoIndex < videoArray.length - 1) { currentVideoIndex++ }
+         else { currentVideoIndex = 0 }
+         video.src = videoArray[currentVideoIndex]
+         video.play()
+      }
+      function skipBack() {
+         video.currentTime -= 5
+      }
+      function skipForward() {
+         video.currentTime += 5
+      }
+      function mute() {
+         video.muted = !video.muted
+      }
+      function setVolume() {
+         video.volume = document.getElementById("volumeSlider").value
+      }
+      function setPlaybackSpeed() {
+         video.playbackRate = document.getElementById("playbackSpeed").value
+      }
+      function seekTo() {
+         var seekToTime = video.duration * (timeline.value / 100)
+         video.currentTime = seekToTime
+      }
+   </script>
+</body>
+</html>
+
+
+
+
+ 
+ 
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Day 1 Lab</title>
+</head>
+<body>
+   <video src="./Media/frozen.mp4" width="500"></video>
+   <script>
+
+   </script>
+</body>
+</html> -->
