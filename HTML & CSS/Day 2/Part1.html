@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <h2>GeoLocation Task</h2>
+   <button onclick="getLocation()">get Location</button>
+   <button onclick="stopWatch()">STOP</button>
+   <hr>
+   <h2>Workers Task</h2>
+   <button id="sum1">calc sum1</button>
+   <button id="sum2">calc sum2</button>
+   <button id="bg">change bg</button>
+   <hr>
+   <h2>LocalStorage & Validation Task</h2>
+   <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required><br><br>
+      <input type="button" value="Add User" onclick="addUser()">
+   </form>
+   <br>
+   <button onclick="deleteAllUsers()">Delete All Users</button>
+   <table id="usersTable">
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Delete</th>
+      </tr>
+   </table>
+   <hr>
+   <h2>MicroData Task: Inspect</h2>
+   <div style="display: none;" itemscope itemtype="http://data-vocabulary.org/Organization">
+      <h2 itemprop="name">SD & Gaming CoE, ITI.</h2>
+      <h2 itemprop="tel">35355695</h2>
+      <h2 itemprop="url">http:www.iti.gov.eg/</h2>
+      <h2 itemscope itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+         <p itemprop="street-address">km 28 Cairo-Alexandria Desert Road</p>
+         <p itemprop="locality">Smart Village</p>
+         <p itemprop="region">Giza</p>
+         <p itemprop="country-name">Egypt</p>
+         <p itemprop="postal-code">11371</p>
+      </h2>
+      <h2 itemscope itemprop="geo" itemscope itemtype="http://data-vocabulary.org/Geo"> 
+         <p itemprop="latitude">N 38.5323</p>
+         <p itemprop="longitude">W 77.0040</p>
+      </h2>
+   </div>
+
+   <script>
+         let watchID
+         function getLocation() {
+            watchID = navigator.geolocation.watchPosition(showPosition)
+         }
+         function showPosition(position) {
+            let lat = position.coords.latitude
+            let long = position.coords.longitude
+            console.log(lat, long)
+            
+            setTimeout(function () {
+               let newWindow = window.open("http://maps.google.com/maps?q="+ lat + "," + long,"","width=500,height=100")
+            }, 5000)
+         }
+         function stopWatch() {
+         navigator.geolocation.clearWatch(watchID)
+         }
+         let worker1 = new Worker("worker1.js")
+         let worker2 = new Worker("worker2.js")
+         let sum1 = document.getElementById("sum1");
+         let sum2 = document.getElementById("sum2");
+         let bg = document.getElementById("bg");
+         // console.log(sum , bg)
+         sum1.onclick = function () {
+            worker1.postMessage("")
+         }
+         sum2.onclick = function () {
+            worker2.postMessage("")
+         }
+         worker1.onmessage = function (message) {
+            console.log(message);
+         }
+         worker2.onmessage = function (message) {
+            console.log(message);
+         }
+         bg.onclick = function () {
+            if (document.body.style.background !== 'green') {
+                document.body.style.background = "green";
+            } else {
+                document.body.style.background = "blue";
+            }
+         }
+
+         displayUsers()
+
+         function addUser() {
+            let name = document.getElementById("name").value
+            let age = document.getElementById("age").value
+            let user = { name: name, age: age }
+            let users = JSON.parse(localStorage.getItem("users")) || []
+            users.push(user)
+            localStorage.setItem("users", JSON.stringify(users))
+            displayUsers()}
+
+         function displayUsers() {
+            let users = JSON.parse(localStorage.getItem("users")) || []
+            let table = document.getElementById("usersTable")
+            table.innerHTML = ""
+            for (let i = 0; i < users.length; i++) {
+               let row = table.insertRow(i)
+               let nameCell = row.insertCell(0)
+               let ageCell = row.insertCell(1)
+               let deleteCell = row.insertCell(2)
+               nameCell.innerHTML = users[i].name
+               ageCell.innerHTML = users[i].age
+               let deleteButton = document.createElement("button")
+               deleteButton.innerHTML = "Delete"
+               deleteButton.onclick = function () {
+                  users.splice(i, 1)
+                  localStorage.setItem("users", JSON.stringify(users))
+                  displayUsers()
+               }
+               deleteCell.appendChild(deleteButton)
+            }}
+
+         function deleteAllUsers() {
+            localStorage.removeItem("users")
+            displayUsers()
+         }
+   </script>
+</body>
+</html>
