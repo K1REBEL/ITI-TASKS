@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      #slider{
+         margin:50px auto;
+         width:600px;
+         height:400px;
+         padding:5px;
+         position:relative;
+      }
+      #slider li{
+         position:absolute;
+         top:5px;
+         left:5px;
+         right:5px;
+         bottom:5px;
+      }
+      .zlide {
+        width: 500px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .container {
+         display: flex;
+         justify-content: space-between;
+      }
+      .box {
+         width: 30%;
+         padding: 10px;
+         text-align: center;
+      }
+      .box img {
+         width: 100%;
+         height: 400px;
+         margin-bottom: 10px;
+         cursor: pointer;
+      }
+      .box .textbox {
+         width: 100%;
+         word-wrap: break-word;
+         display: none;
+      }
+   </style>
+</head>
+<body>
+   <div class="wrapper">
+      <ul id="slider">
+         <li class="slide"><img class="zlide" src="snowman1.jpeg"></li>
+         <li class="slide"><img class="zlide" src="snowman2.jpeg"></li>
+         <li class="slide"><img class="zlide" src="snowman3.jpeg"></li>
+      </ul>
+      <button id="stop">STOP</button>
+   </div>
+
+   <hr>
+
+   <div class="container">
+      <div class="box">
+         <img src="snowman1.jpeg" alt="Image 1">
+         <div class="textbox hidden">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit rerum rem asperiores molestiae ex officiis corrupti ab hic voluptatibus, adipisci maiores! Reprehenderit dolor quaerat a corrupti perspiciatis dolore totam.
+         </div>
+      </div>
+
+      <div class="box">
+         <img src="snowman2.jpeg" alt="Image 2">
+         <div class="textbox hidden">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum voluptas voluptatum, distinctio odio deserunt quo, sed atque hic nisi maiores quod. Blanditiis, temporibus nemo? Commodi minus quasi aut atque ex.
+         </div>
+      </div>
+
+      <div class="box">
+         <img src="snowman3.jpeg" alt="Image 3">
+         <div class="textbox hidden">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae labore officia, eaque praesentium tenetur vel optio odio ipsa voluptates necessitatibus veniam quasi dolores obcaecati iste natus. Qui beatae obcaecati saepe!
+         </div>
+      </div>
+  </div>
+   <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+   <script src="./index.js"></script>
+</body>
+</html>
