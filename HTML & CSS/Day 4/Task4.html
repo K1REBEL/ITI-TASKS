@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 4</title>
+   <style>
+      .container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 20vh;
+      }
+      .input {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         background-color: #f1f1f1;
+         border-radius: 10px;
+         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+         padding: 10px;
+         width: 400px;
+      }
+      input {
+         width: 240px;
+         height: 25px;
+         margin-right: 20px;
+         border: none;
+         padding: 5px;
+         border-radius: 5px;
+         text-align: center;
+      }
+      button {
+         border: none;
+         border-radius: 10px;
+         width: 60px;
+         height: 35px;
+         background-color: blue;
+         margin-left: 5px;
+         color: white;
+      }
+      .result{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 80vh;
+      }
+      .data #price{
+         display: inline;
+         color: orange;
+      }
+      .data #category{
+         display: inline;
+         margin: 25px;
+      }
+      #slider{
+         margin:50px auto;
+         width:600px;
+         height:400px;
+         padding:5px;
+         position:relative;
+         list-style-type: none;
+      }
+      #slider li{
+         position:absolute;
+         top:5px;
+         left:5px;
+         right:5px;
+         bottom:5px;
+      }
+      .zlide {
+        width: 500px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+  </style>
+</head>
+<body>
+   <div class="container">
+      <div class="input">
+         <input id="prodID" type="number" >
+         <button>GET</button>
+      </div>
+   </div>
+
+   <div class="result">
+      <ul id="slider"></ul>
+      <div class="data"></div>
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $(".input").on("click", "button", { id: $('#prodID').data }, function(e) {
+            var userInput = $("#prodID").val()
+            console.log(userInput)
+            url=`https://dummyjson.com/products/${userInput}`
+            $(function(userInput){
+               $.ajax({
+                  url,
+                  success:function(res){
+                     // console.log(url);
+                     console.log(res)
+                     for(let i=0; i<res.images.length; i++){
+                        $('#slider')
+                        .append($('<li>').attr('class', "slide")
+                        .append($('<img>').attr('src', res.images[i]).attr('class', "zlide")))
+                        }
+                     $('.data')
+                        .append($('<h3>').text(res.title))
+                        .append($('<h4>').attr('id', "price").text(res.price))
+                        .append($('<h4>').attr('id', "category").text(res.category))
+                        .append($('<p>').attr('id', "desc").text(res.description))
+                        .append($('<h4>').attr('id', "stock").text("remaining stock: " + res.stock))
+                  },
+                  error:function(err){
+                     console.log(err)
+                  },
+               })
+            })
+         })
+         $('#slider>li:gt(0)').hide()
+         var interval = setInterval(function() {
+            $('#slider > li:first')
+            .fadeOut(1000)
+            .next()
+            .fadeIn(1000)
+            .end()
+            .appendTo('#slider')
+            }, 2000)
+      })
+   </script>
+</body>
+</html>

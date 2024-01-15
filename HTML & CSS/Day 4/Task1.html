@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 1</title>
+   <style>
+      div{
+         width: 30%;
+         display: inline-block;
+      }
+   </style>
+</head>
+<body>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         $.ajax({
+            url:"https://dummyjson.com/products",
+            success:function(res){
+               console.log(res)
+               for(let i=0; i<res.products.length; i++){
+                  $('body')
+                  .append($('<div>')
+                     .append($('<img>').attr('src', res.products[i].thumbnail))
+                     .append($('<h4>').text(res.products[i].title))
+                     .append($('<p>').text(res.products[i].description)))
+               }
+            },
+            error:function(err){
+               console.log(err)
+            },
+         })
+      })
+   </script>
+</body>
+</html>

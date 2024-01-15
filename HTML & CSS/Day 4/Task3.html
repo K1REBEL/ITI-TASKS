@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 3</title>
+   <style>
+      body{
+         background-color: lightgray;
+      }
+      .container {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 30vh;
+      }
+      .input {
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         border-radius: 10px;
+         padding: 10px;
+         width: 400px;
+      }
+      input {
+         width: 240px;
+         height: 33px;
+         margin-right: 20px;
+         border: none;
+         padding-left: 10px;
+         border-radius: 30px;
+      }
+      button {
+         border: none;
+         border-radius: 30px;
+         width: 100px;
+         height: 35px;
+         background-color: white;
+         color: gray;
+         margin-left: 5px;
+      }
+      .result{
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+      }
+      .task{
+         /* display: block; */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         padding-left: 15px;
+         padding-right: 15px;
+         border-radius: 70px;
+         /* background-color: lightgreen; */
+      }
+      .task .tasktext{
+         width: 400px;
+         height: 30px;
+         /* margin: 20px; */
+         padding-left: 10px;
+         padding-top: 2px;
+         font-size: 20px;
+         border: 2px solid gray;
+         border-radius: 25px;
+      }
+      .DnBtn{
+         border: none;
+         border-radius: 22px;
+         width: 70px;
+         height: 40px;
+         background-color: white;
+         color: gray;
+         margin-left: 5px;
+         font-size: 18px;
+      }
+      .DelBtn{
+         border: none;
+         border-radius: 22px;
+         width: 80px;
+         height: 40px;
+         background-color: white;
+         color: gray;
+         margin-left: 5px;
+         font-size: 18px;
+      }
+   </style>
+</head>
+<body>
+   <div class="container">
+      <div class="input">
+
+         <input id="newTask" type="text" placeholder="Add your Task Here">
+         <button>Add Task</button>
+      </div>
+   </div>
+
+   <div class="result">
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         loadTasks()
+         $(".input").on("click", "button", {task: $('#newTask').data}, function(e){
+            var task = $("#newTask").val()
+            console.log(task)
+            $('.result')
+               .append($('<div>').attr('class', "task")
+                  .append($('<h3>').attr('class', "tasktext").text(task))
+                  .append($('<button>').attr('class', "DnBtn").text("Done"))
+                  .append($('<button>').attr('class', "DelBtn").text("Delete")))
+
+            var tasks = JSON.parse(localStorage.getItem("tasks")) || []
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks))
+         })
+         $(document).on("click", ".task > .DnBtn", function() {
+            console.log("clicked")
+            $(this).closest(".task").css("background-color", "lightgreen")
+         })
+
+         $(document).on("click", ".DelBtn", deleteTask)
+         function deleteTask() {
+
+            // var task = $(this).closest(".tasktext")
+            var task = $(this).parent()
+            var taskText = $(this).parent().children().first().text()
+            // console.log(taskText)
+            task.remove()
+
+            var tasks = JSON.parse(localStorage.getItem("tasks")) || []
+            var index = tasks.indexOf(taskText)
+            if (index !== -1) {
+                tasks.splice(index, 1)
+                localStorage.setItem("tasks", JSON.stringify(tasks))
+            }
+         }
+      })
+      function loadTasks() {
+         var tasks = JSON.parse(localStorage.getItem("tasks")) || []
+         for (var i = 0; i < tasks.length; i++) {
+            $('.result')
+               .append($('<div>').attr('class', "task")
+                  .append($('<h3>').attr('class', "tasktext").text(tasks[i]))
+                  .append($('<button>').attr('class', "DnBtn").text("Done"))
+                  .append($('<button>').attr('class', "DelBtn").text("Delete")))
+         }
+      }
+   </script>
+</body>
+</html>

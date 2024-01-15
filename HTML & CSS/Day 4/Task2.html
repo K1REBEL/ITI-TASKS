@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Task 2</title>
+   <style>
+      #draggable {
+         width: 150px; 
+         height: 200px; 
+         background-color: yellow; 
+         padding: 0.5em; 
+         float: right; 
+         margin: 10px 10px 10px 0;
+      }
+      #draggable img { 
+         width: 130px; 
+      }
+      #droppable { 
+         width: 50%; 
+         height: 100%; 
+         padding: 0.5em; 
+         float: left; 
+         margin: 10px; 
+      }
+   </style>
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+   <script>
+      $(function() {
+         $("#draggable").draggable()
+         $("#droppable").droppable({
+            drop: function(event, ui) {
+               var interval = setInterval(function() {
+                  $('.ui-widget-content')
+                     .fadeOut(1000)
+                  }, 2000)
+               $( this )
+                  .addClass("ui-state-highlight")
+                  .find("p")
+                     .html("Dropped!")
+            }
+         })
+      })
+  </script>
+</head>
+<body>
+   <div id="draggable" class="ui-widget-content">
+      <img src="shocked-tom-512x512.png" alt="Shocked Tom">
+      <p>Drag Me</p>
+   </div>
+
+   <div id="droppable" class="ui-widget-header">
+      <img src="blackhole.gif" alt="">
+      <p>Drop here</p>
+   </div>
+</body>
+</html>
