@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 4</title>
+   <style>
+      body{
+         background-color: lightblue;
+      }
+      .column{
+         height: 100vh;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+      }
+      .row{
+         width: 100%;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+      }
+      section{
+         width: 300px;
+         height: 300px;
+         display: grid;
+         grid-template-areas: 
+            "rect2 rect1 rect1"
+            "rect2 square1 rect4"
+            "rect3 rect3 rect4";
+      }
+      section .rect1,.rect2,.rect3,.rect4{
+         background-color: black;
+         /* color: white; */
+         margin: 1px;
+      }
+      .rect1{
+         width: 200px;
+         height: 100px;
+         grid-area: rect1;
+      }
+      .rect2{
+         width: 100px;
+         height: 200px;
+         grid-area: rect2;
+      }
+      .rect3{
+         width: 200px;
+         height: 100px;
+         grid-area: rect3;
+      }
+      .rect4{
+         width: 100px;
+         height: 200px;
+         grid-area: rect4;
+      }
+      .square1{
+         width: 100px;
+         height: 100px;
+         background-color: black;
+         /* color: white; */
+         grid-area: square1;
+      }
+      @media (max-width:500px){
+         section{
+            transform: rotate(90deg);
+         }
+      }
+        @media (min-width:501px) and (max-width:700px){
+         section{
+            transform: rotate(60deg);
+         }
+      }
+        @media (min-width:701px) and (max-width:900px){
+         section{
+            transform: rotate(30deg);
+         }
+      }
+   </style>
+</head>
+<body>
+   <div class="column">
+      <div class="row">
+         <section>
+            <div class="rect1">toob 3lena yarab</div>
+            <div class="rect2">ana kan maly b el klam da</div>
+            <div class="square1">malo el back-end</div>
+            <div class="rect3">7lw w gameel w kollo logic</div>
+            <div class="rect4">yalla amma nshof el klam da byts7a7 wlla la2 (comment el text color)</div>
+         </section>
+      </div>
+   </div>
+</body>
+</html>
