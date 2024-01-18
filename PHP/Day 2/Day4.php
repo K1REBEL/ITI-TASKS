@@ -35,7 +35,7 @@
       foreach ($vals as $key => $val) {
          echo "$key => $val ";
       }
-      echo "Sum of values in the array = $arr_sum" . "\r\n";
+      echo "Sum of values in the array = $arr_sum" . "<br>";
       echo "Average value in the array is $avg";
    ?>
    <hr>
@@ -48,12 +48,15 @@
 
       asort($ages);
       print_r($ages);
+      echo "<br>";
 
       arsort($ages);
       print_r($ages);
+      echo "<br>";
 
       ksort($ages);
       print_r($ages);
+      echo "<br>";
 
       krsort($ages);
       print_r($ages);
