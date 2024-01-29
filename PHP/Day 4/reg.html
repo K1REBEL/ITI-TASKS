@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+</head>
+<body>
+   <form action="reg.php" method="GET">
+      <table>
+         <tr>
+            <td>Name:</td>
+            <td><input type="text" name="name"></td>
+         </tr>
+         <tr>
+            <td>E-mail:</td>
+            <td><input type="email" name="email"></td>
+         </tr>
+         <tr>
+            <td>Gender:</td>
+            <td>
+               <input type="radio" name="gender" value="Male">
+               <label for="male">Male</label>
+               <input type="radio" name="gender" value="Female">
+               <label for="female">Female</label>
+            </td>
+         </tr>
+         <tr>
+            <td>Receive E-mails from us</td>
+            <td><input type="checkbox" name="agree"></td>
+         </tr>
+         <tr>
+            <td><input type="submit" value="Submit"></td>
+         </tr>
+      </table>
+   </form>
+</body>
+</html>
