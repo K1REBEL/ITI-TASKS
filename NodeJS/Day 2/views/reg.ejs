@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+   <style>
+      body *{
+         margin: 3px;
+      }
+   </style>
+</head>
+<body>
+   <form action="./register" method="POST">
+
+      <label for="name">Name: </label>
+      <input type="text" name="name">
+      <br>
+      <label for="pass">Password: </label>
+      <input type="password" name="pass">
+      <br>
+      <label for="email">E-mail: </label>
+      <input type="email" name="email">
+      <br>
+
+      <button type="submit">Submit</button>
+
+   </form>
+
+   <table>
+      <tr><th>Name</th><th>Email</th><th>Password</th></tr>
+      <% for(let user of users){ %>
+          <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.pass %></td>
+          </tr>
+      <% } %>
+  </table>
+  <h3><%= msg %></h3>
+  
+</body>
+</html>

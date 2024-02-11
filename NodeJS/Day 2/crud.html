@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car CRUD</title>
+    <style>
+        body *{
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cars</h1>
+    <br>
+    <button onclick="addCar();">add</button>
+    <br>
+
+    <label for="make">Make: </label>
+    <input type="text" name="make" id="make"/><br/>
+    <label for="model">Model: </label>
+    <input type="text" name="model" id="model"/><br/>
+    <label for="license">License: </label>
+    <input type="text" name="license" id="license"/><br/>
+
+    <div id="data"></div>
+    <script>
+        async function addCar(){
+            const make = document.getElementById("make").value
+            const model = document.getElementById("model").value
+            const License = document.getElementById("license").value
+            const body = {
+                "make":make,
+                "model":model,
+                "license":Number(License)
+            }
+
+            await fetch("http://localhost:7777/cars/add",{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(body)
+            })
+            console.log(body)
+            readAllCars()
+        }
+
+        async function readAllCars(){
+            let res = await fetch("http://localhost:7777/cars/readall")
+            let resBody = await res.json()
+            let cars = resBody.data
+
+            let html = ""
+            let carsHtml = cars.map(car => `<tr>
+                <td>${car.id}</td>
+                <td>${car.make}</td>
+                <td>${car.model}</td>
+                <td>${car.license}</td>
+                <td><button onclick="deleteCar('${car.id}')">Delete</button></td>
+                </tr>`)
+            html = "<table><tr><th>ID</th><th>Make</th><th>Model</th><th>License</th></tr>"+carsHtml.join("\r\n")+"</table>"
+
+            document.getElementById("data").innerHTML=html
+        }
+
+        async function deleteCar(id){
+            let res = await fetch("http://localhost:7777/cars/delete/" + id)
+            let resBody = await res.json()
+            alert(resBody.msg)
+            readAllCars()
+        }
+
+        readAllCars()
+    </script>
+</body>
+</html>
