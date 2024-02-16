@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(5);
         return view('users.index', ['users' => $users]);
     }
 
@@ -43,9 +43,10 @@ class UserController extends Controller
         $intID = (int) $id;
         if(is_int($intID)){
             // $current = User::where('id', $intID)->get();
-            $current = User::find($intID);
+            $current = User::with('posts')->find($intID);
+            $posts = $current->posts;
             // echo $current;
-            return view('users.show', ['current' => $current]);
+            return view('users.show', ['current' => $current, 'posts' => $posts]);
         }else{ return "ID needs to be an integer"; }
     }
 
@@ -74,6 +75,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        if (!$user) { return "User not found. Commence troubleshooting."; }
+
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }
