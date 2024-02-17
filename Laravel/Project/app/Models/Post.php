@@ -15,7 +15,8 @@ class Post extends Model
         'title',
         'slug',
         'body',
-        'enabled',
+        'image',
+        'is_public',
         'published_at',
         'user_id'
     ];

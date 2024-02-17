@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -56,4 +57,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('auth', [SocialController::class, 'auth']);
+    Route::get('auth/{provider}/redirect', [SocialController::class, 'redirect'])->name('auth.social.redirect');
+    Route::get('auth/{provider}/callback', [SocialController::class, 'callback']);
 });

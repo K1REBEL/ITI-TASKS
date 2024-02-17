@@ -16,9 +16,7 @@
    <label for="title">Post Title: </label>
    <input type="text" name="title" value="{{ $posts -> title }}">
    <label for="content">Post Content: </label>
-   <textarea rows = "5" cols = "60" name = "body">
-      {{ $posts -> body }}
-   </textarea>
+   <textarea rows = "5" cols = "60" name = "body">{{ $posts -> body }}</textarea>
    <br>
    @auth
       <input type="text" name="user" value="{{ $logged_in -> id }}" readonly hidden>
@@ -34,11 +32,11 @@
    <br>
    @if ( $posts -> enabled == 1 )
       <input type="checkbox" name="enabled" value="enabled" checked>
-      <label for="enabled">Enable</label>
+      <label for="enabled">Publish Right Away</label>
       <br>
    @elseif( $posts -> enabled == 0 )
       <input type="checkbox" name="enabled" value="enabled">
-      <label for="enabled">Enable</label>
+      <label for="enabled">Publish Right Away</label>
       <br>
    @endif
 

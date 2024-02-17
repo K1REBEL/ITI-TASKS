@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
+            $table->string('image')->default('null');
             $table->string('body');
-            $table->boolean('enabled');
+            $table->boolean('is_public')->default(true);
             $table->dateTime('published_at')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

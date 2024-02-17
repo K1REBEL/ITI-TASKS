@@ -54,7 +54,7 @@ Route::get('users/{id}/delete', [UserController::class, 'destroy'])->name('users
 // POST ROUTES
 
 // Route::get('posts/create', [PostController::class, 'create'])->name('posts.create'); go slightly up to find
-Route::get('posts/store', [PostController::class, 'store'])->name('posts.store');
+Route::post('posts/store', [PostController::class, 'store'])->name('posts.store');
 
 // Route::get('posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');  go slightly up to find
 Route::patch('posts/{id}', [PostController::class, 'update'])->name('posts.update');

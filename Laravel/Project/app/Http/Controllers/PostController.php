@@ -17,6 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(5);
+        // dd($posts);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -35,20 +36,37 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $author = User::find($request->input('user'));
         if (!$author) {
             return "Author not found, commence troubleshooting" . "<br>" . $request->input('user');
+        }
+        if ($request->file('image')->isValid()){
+            $path = $request->file('image')->store('posts', 'public');
         }
         $slug = Str::slug($request->input('title'));
         $enabled = !empty($request->input('enabled'));
         if ($enabled){
             $published = now();
-            $post = Post::create(['title' => $request->input('title'), 'body' => $request->input('body'), 'user_id' => $author->id, 'slug' => $slug, 'enabled' => $enabled, 'published_at' => $published]);
+            $post = Post::create([
+                'title' => $request->input('title'), 
+                'image' => $path,
+                'body' => $request->input('body'), 
+                'user_id' => $author->id, 
+                'slug' => $slug, 
+                'is_public' => $enabled, 
+                'published_at' => $published]);
         } else {
-            $post = Post::create(['title' => $request->input('title'), 'body' => $request->input('body'), 'user_id' => $author->id, 'slug' => $slug, 'enabled' => $enabled]);
+            $post = Post::create([
+                'title' => $request->input('title'), 
+                'image' => $path,
+                'body' => $request->input('body'), 
+                'user_id' => $author->id, 
+                'slug' => $slug, 
+                'is_public' => $enabled]);
         }
         event(new PostCreated($post));
-        return "Post you just created has been added!";
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -93,7 +111,7 @@ class PostController extends Controller
                 ['title' => $request->input('title'),
                 'body' => $request->input('body'),
                 'slug' => $slug,
-                'enabled' => $enabled,
+                'is_public' => $enabled,
                 'published_at' => $published,
                 'user_id' => $request->input('user')] );
         } else {
@@ -102,11 +120,11 @@ class PostController extends Controller
                 ['title' => $request->input('title'),
                 'body' => $request->input('body'),
                 'slug' => $slug,
-                'enabled' => $enabled,
+                'is_public' => $enabled,
                 'published_at' => $published,
                 'user_id' => $request->input('user')] );
         }
-        return "You updated post no. $id";
+        return redirect()->route('posts.index');
     }
 
     /**
