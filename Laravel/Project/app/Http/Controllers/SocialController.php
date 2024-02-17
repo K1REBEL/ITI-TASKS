@@ -23,6 +23,7 @@ class SocialController extends Controller
     }
 
     public function callback(string $provider){
+        
         $validator = Validator::make(compact('provider'), 
         [ 'provider' => [Rule::in(['facebook', 'twitter'])] ]);
         if($validator->fails()){ abort(422, "$provider not supported");}
